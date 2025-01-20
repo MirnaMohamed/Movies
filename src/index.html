@@ -6,21 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies</title>
     <link href="./output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css" />
 
 </head>
 
 <body class="bg-black">
-    <nav class="bg-gray-400 text-black flex items-center justify-between px-6 h-16">
+    <nav class="bg-gray-400 text-black flex items-center justify-between px-6 h-16 w-full md:h20">
         <div class="flex items-center space-x-8 flex-1">
             <a href="#" class="text-xl font-bold">MoviesAPI</a>
-        
-        
+
+
             <ul class="flex space-x-6 items-center">
                 <li class="relative group">
-                    <select class="bg-gray-400 border-none hover:text-gray-300">
-                        <option value="Movies">Movies</option>
-                        <option value="TVshows">TVshows</option>
-                        <option value="People">People</option>
+                    <select id="dropdown" class="bg-gray-400 border-none hover:text-gray-300">
+                        <option value="all">All</option>
+                        <option value="movie">Movies</option>
+                        <option value="tv">TVshows</option>
+                        <option value="person">People</option>
                     </select>
                 </li>
                 <li>
@@ -30,11 +32,17 @@
                     <a href="" class="hover:text-gray-300">Contact</a>
                 </li>
                 <li>
-                    <a href="" class="hover:text-gray-300">Search</a>
+                    <a href="" class="hover:text-gray-300"><i class="fas fa-search"></i></a>
                 </li>
             </ul>
         </div>
     </nav>
+    <div id="content" class="grid grid-cols-5 gap-4 p-6">
+        
+        
+    </div>
+
+    <script src="index.js"></script>
 </body>
 
 </html>

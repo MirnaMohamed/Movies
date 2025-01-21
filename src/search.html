@@ -7,7 +7,7 @@
     <link href="./css/output.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css"/>
   </head>
-  <body>
+  <body class="bg-[url('../images/search-bg.png')] bg-cover bg-no-repeat h-screen">
     <nav
       class="flex flex-col items-center justify-center peer fixed bg-cyan-700/25 w-full md:h-20 h-max"
     >
@@ -26,14 +26,14 @@
         </li>
       </ul>
     </nav>
-    <main class="h-full flex justify-center w-full md:pt-24 pt-20 bg-[url('/images/search-bg.png')]">
+    <main class="h-full flex flex-col justify-center items-center w-full md:pt-24 pt-20 	">
       <input
             class="text-center  w-9/12 rounded focus:outline-none border-b-2 border-slate-200 focus:border-sky-600 h-max"
             id="searchBar"
             type="text"
             placeholder="Search movies and tv shows"
           />
-          <div id="results" class="flex items-center justify-center ">
+          <div id="results" class="flex flex-wrap items-center justify-center w-full px-1">
           </div>
     </main>
     <footer></footer>

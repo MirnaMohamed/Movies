@@ -41,7 +41,7 @@
                     <i class="text-white fa-solid fa-bars"></i>
                 </button>
             </div>
-            
+
         </div>
     </nav>
     <ul id="section2" class="hidden md:hidden bg-slate-900 text-white space-x-6 items-end relative text-xl right-0">
@@ -69,6 +69,23 @@
 
 
     </div>
+    <div id="pagination" class="flex items-center justify-center space-x-2 mt-6">
+        <!-- Previous Button -->
+        <button id="prevPage" 
+            class="px-4 py-2 text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring focus:ring-indigo-200 disabled:opacity-50">
+            Previous
+        </button>
+    
+        <!-- Page Numbers (this will be dynamically populated) -->
+        <div id="pageNumbers" class="flex space-x-2"></div>
+    
+        <!-- Next Button -->
+        <button id="nextPage" 
+            class="px-4 py-2 text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring focus:ring-indigo-200">
+            Next
+        </button>
+    </div>
+    
 
     <script src="index.js"></script>
 </body>

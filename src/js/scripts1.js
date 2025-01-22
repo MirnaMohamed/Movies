@@ -89,35 +89,46 @@ function emailExists(callback) {
         if (myhttpg.readyState === 4) {
             if (myhttpg.status === 200) {
                 try {
+                    if (!myhttpg.response) {
+                        throw new Error("Empty response from server");
+                    }
+
                     const users = JSON.parse(myhttpg.response);
+                    if (!Array.isArray(users)) {
+                        throw new Error("Invalid response format");
+                    }
+
+                    // Check if the email exists
                     for (let user of users) {
                         if (user.demail === email.value) {
                             pEmail.style.color = "red";
                             pEmail.classList.remove("hidden");
                             pEmail.innerText = "Email already exists";
 
-                            msglogin.style.color="red";
+                            msglogin.style.color = "red";
                             msglogin.classList.remove("hidden");
-                            msglogin.innerText="Email already exists. you can login now or change email";
-                           
+                            msglogin.innerText = "Email already exists. You can log in or change the email.";
                             callback(true);
                             return;
                         }
                     }
+
+                    // Email does not exist
                     callback(false);
                 } catch (error) {
-                    console.error("Failed to parse JSON:", error);
-                    alert("Error validating email.");
-                    callback(true);
+                    console.error("Error processing response:", error);
+                    alert("Error validating email. Please try again later.");
+                    callback(true); // Assume failure to prevent registration
                 }
             } else {
                 console.error("Error fetching users:", myhttpg.status);
-                alert("Server error. Unable to validate email.");
-                callback(true);
+                alert("Server error. Unable to validate email. Please try again later.");
+                callback(true); // Assume failure to prevent registration
             }
         }
     });
 }
+
 
 function registerUser() {
     const newUser = {
@@ -148,6 +159,14 @@ function registerUser() {
 btn_reg.addEventListener("click", (event) => {
     event.preventDefault(); // Prevent page refresh
 
+    if (!checkPasswordsMatch(pass.value, confirm.value)) {
+        pcon.style.color="red";
+        pcon.classList.remove("hidden");
+        pcon.innerText="Not match password ";
+        alert("Passwords do not match!");
+        return;
+    }
+
    if ( !isValidUsername(username.value) ||
         !isValidEmail(email.value) ||
         !isValidpass(pass.value) ||
@@ -157,13 +176,7 @@ btn_reg.addEventListener("click", (event) => {
         return;
     }
 
-    if (!checkPasswordsMatch(pass.value, confirm.value)) {
-        pcon.style.color="red";
-        pcon.classList.remove("hidden");
-        pcon.innerText="Not match password ";
-        alert("Passwords do not match!");
-        return;
-    }
+    
 
     emailExists((exists) => {
         if (exists) {

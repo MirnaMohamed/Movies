@@ -11,7 +11,7 @@ var msglogin=document.getElementById("msglogin");
 var btn_reg =document.getElementById("regButton");
 
 function isValidUsername(n){
-    const usernameRegex=/^[A-za-z][A-za-z0-9.-_]{1,20}$/;
+    const usernameRegex=/^[A-za-z][A-za-z0-9.-_]{4,20}$/;
     if( usernameRegex.test(n)){
         console.log("done");
     pUser.innerText = "Valid username";
@@ -20,9 +20,9 @@ function isValidUsername(n){
       return 1;
     } else {
         pUser.innerText =
-          " Must start with a letter and be 2-20 characters long.";
+          " Must start with a letter and be 5-20 characters long.";
         pUser.style.color = "red";
-        pUser.classList.remove("hidden"); // Show feedback
+        pUser.classList.remove("hidden"); 
         return 0;
     }
 }
@@ -44,7 +44,7 @@ function isValidEmail(n){
     }
 }
 function isValidpass(n){
-    const passRegex=/^[A-za-z0-9.-_]{7,}$/;
+    const passRegex=/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,20}$/;
     if( passRegex.test(n)){
        
         pPass.innerText = "Valid username";
@@ -53,7 +53,7 @@ function isValidpass(n){
         return 1;
     } else {
         pPass.innerText =
-          " Must  be 7 characters or more.";
+          "between 8 and 20 characters MUST contain(digit , lowercase and uppercase letter , special char)";
           pPass.style.color = "red";
           pPass.classList.remove("hidden");
           return 0;

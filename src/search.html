@@ -10,49 +10,67 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css"
     />
   </head>
-  <body class="bg-black">
+  <body class="bg-[url('../images/theater.jpg')] bg-cover bg-fixed w-full">
     <nav
-      class="flex md:flex-row flex-col items-center justify-evenly peer fixed bg-slate-900 text-white w-full md:h-20 h-max z-50	"
+      class="flex md:items-center justify-between fixed top-0 bg-slate-900 text-white w-full md:h-20 h-max z-50"
     >
-      <div class="pl-1 w-1/6">
-        <a
-          href="./index.html"
-          class="text-lg md:text-2xl font-bold flex justify-around items-center"
-        >
+      <div class="ml-4 my-0.5 w-5/12 text-center flex md:items-center md:h-3.5 h-fit">
+        <a href="./index.html" class="text-lg md:text-2xl font-bold">
           <i class="fa-solid fa-film"></i> MoviesAPI
         </a>
       </div>
-      <div>
-        <div class="flex items-center justify-center md:hidden p-1" id="menu">
+      <div class="w-6/12 justify-between">
+        <div
+          class="flex items-center justify-self-end text-center md:hidden my-1 p-1 mr-3"
+          id="menu"
+        >
           <i class="text-center size-5 fa-solid fa-bars"></i>
         </div>
         <ul
-          class="hidden md:flex flex-wrap md:flex-row flex-col h-full justify-evenly items-center text-center w-full"
+          class="hidden md:flex flex-wrap md:flex-row flex-col h-full justify-around items-center w-full pb-2"
         >
-          <li><a class="font-medium" href="./index.html">Home</a></li>
-          <li class="md:w-2/6 w-full hidden md:inline-block">
+          <li>
+            <select
+              id="dropdown"
+              class="bg-slate-900 border-none hover:text-gray-300"
+            >
+              <option value="all">All</option>
+              <option value="movie">Movies</option>
+              <option value="tv">TVshows</option>
+              <option value="person">People</option>
+            </select>
+          </li>
+          <li class="hidden md:inline-block">
             <i class="fas fa-search"></i>
           </li>
           <li>
-            <a class="font-medium" href="./about.html" class="">About</a>
+            <a class="font-medium" href="./about.html" class="">Contact</a>
+          </li>
+          <li>
+            <a class="font-medium" href="./about.html" class=""
+              >Login/Register</a
+            >
           </li>
         </ul>
       </div>
     </nav>
     <main
-      class="h-full flex flex-col justify-center items-center w-full md:pt-24 pt-20"
+      class="h-full flex flex-wrap flex-col justify-center items-center w-full "
     >
+    <div class="w-full h-fit flex justify-center md:mt-24 mt-[5rem]">
       <input
-        class="text-center w-9/12 rounded focus:outline-offset-8 border-b-2 border-slate-200 focus:border-sky-600 h-max bg-gray-200"
+        class="text-center text-white w-9/12 h-10 rounded focus:outline-offset-8 border-b-2 border-slate-600 focus:border-sky-600 bg-slate-800"
         id="searchBar"
         type="text"
         placeholder="Search movies and tv shows"
       />
+    </div>
+
       <div
         id="results"
         class="flex flex-wrap items-center justify-center w-full px-1 m-4"
       ></div>
-      <div id="pageNumber" class="flex flex-wrap hidden md:hidden"></div>
+      <div id="pageNumber" class="flex flex-wrap hidden md:hidden mb-3"></div>
     </main>
     <footer></footer>
     <script src="js/script.js"></script>

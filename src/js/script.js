@@ -15,12 +15,14 @@ menu.addEventListener('click', function () {
 });
 
 //updating the search results whenever a character is typed
+var selectorValue = document.getElementById("dropdown");
 var searchResults = document.getElementById("results");
 var pageNo = document.getElementById("pageNumber");
 var search = document.getElementById('searchBar');
 let url = new URL("https://api.themoviedb.org/3/search/multi");
 let xhr = new XMLHttpRequest();
 search.addEventListener('keyup', function () {
+    console.log(selectorValue.value)
     if (search.value !== null) {
         url.searchParams.append("query", search.value);
         xhr.open("GET", url);
@@ -42,7 +44,6 @@ search.addEventListener('keyup', function () {
 function handleResponse(response) {
     var results = [];
     results = response.results;
-    var currentPage = response.page;
     var total_pages = response.total_pages;
     viewMovies(results, total_pages);
 }
@@ -50,19 +51,19 @@ function viewMovies(movies, total_pages) {
     searchResults.innerHTML = "";
     for (m of movies) {
         var movieElement = document.createElement("div");
-        movieElement.classList.add("flex", "flex-col", "justify-center", "items-center", "w-72", "h-30", "px-3", "py-3");
-        movieElement.classList.add("shadow-md", "bg-slate-400", "m-2", "rounded");
+        movieElement.classList.add("flex", "flex-wrap", "flex-col", "justify-center", "items-center", "w-72", "h-30", "px-3", "py-3");
+        movieElement.classList.add("shadow-lg", "bg-blend-overlay", "shadow-slate-600", "bg-slate-400", "m-2", "rounded");
         var img, title;
         if (m.media_type == "person") {
-            img = `https://image.tmdb.org/t/p/w500/${m.profile_path}'`;
+            img = `https://image.tmdb.org/t/p/w500/${m.profile_path}' class='rounded w-full'`;
             title = m.name;
         }
         else {
-            img = `https://image.tmdb.org/t/p/w500/${m.poster_path}'`;
+            img = `https://image.tmdb.org/t/p/w500/${m.poster_path}' class='rounded w-full'`;
             title = m.title ? m.title : m.name;
         }
         if (img.includes("null")) {
-            img = "./images/search-bg.png' class='h-[24.75rem]'";
+            img = "./images/search-bg.png' class='h-[24.50rem] rounded'";
         }
         movieElement.innerHTML = `<img src='${img}/>
                                 <h3>${title}</h3>`;
@@ -77,7 +78,7 @@ function displayPages(movies, total_pages) {
     if (total_pages <= 5 && total_pages !== 0) {
         for (var i = 1; i < total_pages + 1; i++) {
             var page = document.createElement("div");
-            page.classList.add("m-2", "p-2", "rounded", "bg-slate-600", "text-white", "cursor-pointer");
+            page.classList.add("m-2", "p-2.5", "rounded", "bg-slate-600", "text-white", "cursor-pointer");
             page.innerText = i;
             page.id = i;
             pageNo.appendChild(page);
@@ -86,32 +87,29 @@ function displayPages(movies, total_pages) {
     else {
         for (var i = 1; i < 4; i++) {
             var page = document.createElement("div");
-            page.classList.add("m-2", "p-2", "rounded", "cursor-pointer", "bg-slate-600", "text-white");
+            page.classList.add("m-2", "p-2.5", "rounded", "cursor-pointer", "bg-slate-600", "text-white");
             page.innerText = i;
             page.id = i;
             pageNo.appendChild(page);
         }
         var dots = document.createElement("span");
         dots.innerText = "...";
-        dots.classList.add("m-2", "p-2", "text-white")
+        dots.classList.add("m-2", "p-2.5", "text-white")
         pageNo.appendChild(dots);
         var lastPage = document.createElement("div");
-        lastPage.classList.add("m-2", "p-2", "rounded", "cursor-pointer", "bg-slate-600", "text-white");
+        lastPage.classList.add("m-2", "p-2.5", "rounded", "cursor-pointer", "bg-slate-600", "text-white");
         lastPage.innerText = total_pages;
         lastPage.id = total_pages;
         pageNo.appendChild(lastPage);
     }
     pageNo.addEventListener("click", (e) => {
-        console.log(e.target.id.length);
         if (!isNaN(Number(e.target.id)) && e.target.id) {
- 
+
             changePage(e.target.id);
         }
     });
 }
 function changePage(targetPage) {
-
-    console.log(targetPage);
     url.searchParams.delete("query");
     url.searchParams.delete("page");
     url.searchParams.append("query", search.value);

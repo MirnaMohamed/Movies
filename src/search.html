@@ -5,36 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Search Movies & TV Shows</title>
     <link href="./css/output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css"
+    />
   </head>
-  <body class="bg-[url('../images/search-bg.png')] bg-cover bg-no-repeat h-screen">
+  <body class="bg-black">
     <nav
-      class="flex flex-col items-center justify-center peer fixed bg-cyan-700/25 w-full md:h-20 h-max"
+      class="flex md:flex-row flex-col items-center justify-evenly peer fixed bg-slate-900 text-white w-full md:h-20 h-max z-50	"
     >
-      <div class="flex items-center justify-center md:hidden p-1" id="menu">
-        <i class="text-center size-5 fa-solid fa-bars "></i>
+      <div class="pl-1 w-1/6">
+        <a
+          href="./index.html"
+          class="text-lg md:text-2xl font-bold flex justify-around items-center"
+        >
+          <i class="fa-solid fa-film"></i> MoviesAPI
+        </a>
       </div>
-      <ul
-        class="hidden md:flex flex-wrap md:flex-row flex-col h-full justify-evenly items-center text-center w-full"
-      >
-        <li><a class="font-medium" href="./index.html">Home</a></li>
-        <li class="md:w-2/6 w-full hidden md:inline-block">
-          <i class="fas fa-search"></i>
-        </li>
-        <li>
-          <a class="font-medium" href="./about.html" class="">About</a>
-        </li>
-      </ul>
+      <div>
+        <div class="flex items-center justify-center md:hidden p-1" id="menu">
+          <i class="text-center size-5 fa-solid fa-bars"></i>
+        </div>
+        <ul
+          class="hidden md:flex flex-wrap md:flex-row flex-col h-full justify-evenly items-center text-center w-full"
+        >
+          <li><a class="font-medium" href="./index.html">Home</a></li>
+          <li class="md:w-2/6 w-full hidden md:inline-block">
+            <i class="fas fa-search"></i>
+          </li>
+          <li>
+            <a class="font-medium" href="./about.html" class="">About</a>
+          </li>
+        </ul>
+      </div>
     </nav>
-    <main class="h-full flex flex-col justify-center items-center w-full md:pt-24 pt-20 	">
+    <main
+      class="h-full flex flex-col justify-center items-center w-full md:pt-24 pt-20"
+    >
       <input
-            class="text-center  w-9/12 rounded focus:outline-none border-b-2 border-slate-200 focus:border-sky-600 h-max"
-            id="searchBar"
-            type="text"
-            placeholder="Search movies and tv shows"
-          />
-          <div id="results" class="flex flex-wrap items-center justify-center w-full px-1">
-          </div>
+        class="text-center w-9/12 rounded focus:outline-offset-8 border-b-2 border-slate-200 focus:border-sky-600 h-max bg-gray-200"
+        id="searchBar"
+        type="text"
+        placeholder="Search movies and tv shows"
+      />
+      <div
+        id="results"
+        class="flex flex-wrap items-center justify-center w-full px-1 m-4"
+      ></div>
+      <div id="pageNumber" class="flex flex-wrap hidden md:hidden"></div>
     </main>
     <footer></footer>
     <script src="js/script.js"></script>

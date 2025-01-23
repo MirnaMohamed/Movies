@@ -18,42 +18,57 @@ menu.addEventListener('click', function () {
 var searchResults = document.getElementById("results");
 var pageNo = document.getElementById("pageNumber");
 var search = document.getElementById('searchBar');
-let url = new URL("https://api.themoviedb.org/3/search/multi");
-let xhr = new XMLHttpRequest();
-search.addEventListener('keyup', function () {
-    if (search.value !== null) {
-        url.searchParams.append("query", search.value);
-        xhr.open("GET", url);
-        xhr.setRequestHeader("Authorization", 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNDY2YjZmNDY0OTNhMDYxN2Q0ODMxYzU1ZTIwN2EzMiIsIm5iZiI6MTczNzM3MDUxNS42NTQsInN1YiI6IjY3OGUyYjkzZGNiNmU4MzlmMzQzMTY5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ULXL5dwBE5GTNYcCWOJADvApqUpfP7mEq3X7_SN0dTI');
-        if (search.value.trim().length !== 0) {
-            xhr.send();
-            xhr.addEventListener("readystatechange", () => {
-                if (xhr.readyState === 4) {
-                    handleResponse(JSON.parse(xhr.response));
-                }
-            })
-        }
-        else {
-            searchResults.innerHTML = "";
-            pageNo.classList.add("hidden", "md:hidden")
-        }
+function sendRequest(type, page = 1) {
+    let url = new URL(`https://api.themoviedb.org/3/search/${type}`);
+
+    url.searchParams.append("query", search.value);
+    url.searchParams.append("page", page);
+
+    // Ensure the input is not empty
+    if (search.value.trim().length === 0) {
+        searchResults.innerHTML = "";
+        pageNo.classList.add("hidden");
+        return;
     }
+
+    // Set up and send the XMLHttpRequest
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.setRequestHeader(
+        "Authorization",
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNDY2YjZmNDY0OTNhMDYxN2Q0ODMxYzU1ZTIwN2EzMiIsIm5iZiI6MTczNzM3MDUxNS42NTQsInN1YiI6IjY3OGUyYjkzZGNiNmU4MzlmMzQzMTY5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ULXL5dwBE5GTNYcCWOJADvApqUpfP7mEq3X7_SN0dTI"
+    );
+
+
+    xhr.send();
+    xhr.addEventListener("readystatechange", () => {
+        if (xhr.readyState === 4) {
+            handleResponse(JSON.parse(xhr.response), type);
+        }
+    })
+}
+
+search.addEventListener('keyup', function () {
+    sendRequest("multi");
 });
-function handleResponse(response) {
+function handleResponse(response, type) {
     var results = [];
     results = response.results;
+    console.log(results)
     var currentPage = response.page;
     var total_pages = response.total_pages;
-    viewMovies(results, currentPage, total_pages);
+    viewMovies(results, currentPage, total_pages, type);
 }
-function viewMovies(movies, currentPage, total_pages, filterOptions = null) {
+function viewMovies(movies, currentPage, total_pages, type, filterOptions = null) {
     searchResults.innerHTML = "";
     for (m of movies) {
         var movieElement = document.createElement("div");
         movieElement.classList.add("flex", "flex-wrap", "flex-col", "justify-center", "items-center", "w-72", "h-30", "px-3", "py-3");
         movieElement.classList.add("shadow-lg", "bg-blend-overlay", "shadow-slate-600", "bg-slate-400", "m-2", "rounded");
+        movieElement.style.setProperty("--media_type", m.media_type);
+        movieElement.id = m.id;
         var img, title;
-        if (m.media_type == "person") {
+        if (type == "person" || m.media_type == "person") {
             img = `https://image.tmdb.org/t/p/w500/${m.profile_path}' class='rounded w-full'`;
             title = m.name;
         }
@@ -68,10 +83,11 @@ function viewMovies(movies, currentPage, total_pages, filterOptions = null) {
                                 <h3>${title}</h3>`;
         searchResults.appendChild(movieElement);
     }
-    displayPages(movies, currentPage, total_pages);
+    getCards();
+    displayPages(type, currentPage, total_pages);
 }
 //display the page numbers to choose from
-function displayPages(movies, currentPage, total_pages) {
+function displayPages(type, currentPage, total_pages) {
 
     pageNo.classList.remove("hidden", "md:hidden");
     pageNo.innerHTML = "";
@@ -118,43 +134,39 @@ function displayPages(movies, currentPage, total_pages) {
     pageNo.addEventListener("click", (e) => {
         if (!isNaN(Number(e.target.id)) && e.target.id) {
 
-            changePage(e.target.id);
+            changePage(type, e.target.id);
         }
     });
 }
-function changePage(targetPage) {
-    var targetPageDiv = document.getElementById(targetPage);
-    targetPageDiv.classList.add("bg-sky-900")
-    url.searchParams.delete("query");
-    url.searchParams.delete("page");
-    url.searchParams.append("query", search.value);
-    url.searchParams.append("page", targetPage);
-    xhr.open("GET", url);
-    xhr.setRequestHeader("Authorization", 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNDY2YjZmNDY0OTNhMDYxN2Q0ODMxYzU1ZTIwN2EzMiIsIm5iZiI6MTczNzM3MDUxNS42NTQsInN1YiI6IjY3OGUyYjkzZGNiNmU4MzlmMzQzMTY5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ULXL5dwBE5GTNYcCWOJADvApqUpfP7mEq3X7_SN0dTI');
-    xhr.setRequestHeader("accept", "application/json");
-    xhr.send();
-    //to ensure there is no overlapping in the request
-    xhr.removeEventListener("readystatechange", () => { handleResponse(JSON.parse(xhr.response)); });
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-            handleResponse(JSON.parse(xhr.response));
-        }
-    };
+function changePage(type, targetPage) {
+    sendRequest(type, targetPage)
 
 }
+function getCards() {
+    cards = document.getElementById("results").childNodes;
+    console.log(cards);
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].addEventListener('click', (e) => {
+            var movieId = cards[i].id;
+            console.log(movieId);
+            window.location.href = `details.html?id=${movieId}`;
 
-//add filtering criteria
-var filter = document.getElementById("filter");
-var filterDiv = document.getElementById("filterWindow")
-filter.addEventListener("click", () => {
-    if (filterDiv.classList.contains("hidden")) {
-        filterDiv.classList.remove("hidden");
-        filterDiv.classList.add("flex");
-        filterDiv.classList.add("flex-col");
+        });
+    }
+}
+var filterOptions = [];
+var submitFilter = document.getElementById("filter")
+var filterWindow = document.getElementById("filterWindow")
+submitFilter.addEventListener("click", (e) => {
+    console.log(e.target)
+    if (filterWindow.classList.contains("hidden")) {
+        filterWindow.classList.remove("hidden");
+        filterWindow.classList.add("flex");
+        var filterType = document.getElementById("type")
+        filterType.addEventListener("change", ()=> {sendRequest(filterType.value);})
+        
     }
     else {
-        filterDiv.classList.add("hidden");
-        filterDiv.classList.remove("flex");
+        filterWindow.classList.add("hidden");
     }
 })
-

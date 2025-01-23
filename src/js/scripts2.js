@@ -1,8 +1,11 @@
 let email =document.getElementById("email");
 let password =document.getElementById("password");
-let btn =document.getElementById("btn");
+let btn ;
 let msg =document.getElementById("msg");
 
+let username="";
+if(location.href.includes("login")){
+    btn=document.getElementById("btn");
 btn.addEventListener("click",function(event){
     event.preventDefault(); 
     let myhttp = new XMLHttpRequest();
@@ -19,6 +22,7 @@ if(myhttp.readyState==4){
     for(let i=0;i<x.length;i++){
         if(x[i].dpassword == password.value && x[i].demail == email.value ){
             flag=1;
+            username=x[i].dusername;
         }
 
     }
@@ -32,7 +36,9 @@ if(myhttp.readyState==4){
         /////////////////////////////////////////
         console.log("done");
 
-
+        console.log(username);
+        localStorage.setItem("username", username);
+        window.location.replace("index.html");
 
         ///////////////////////////////////////
     }
@@ -40,3 +46,4 @@ if(myhttp.readyState==4){
 
 })
 })
+}

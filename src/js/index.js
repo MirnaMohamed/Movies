@@ -22,7 +22,7 @@ function fetchMovies(category, page = 1) {
             currentPage = page;
             console.log(list);
             display();
-            updateButtonState();
+           updateButtonState();
             renderPageNumbers();
         }
     });
@@ -96,12 +96,29 @@ function getCards() {
             console.log(movieId);
             window.location.href = `details.html?id=${movieId}`;
 
-
-            //8ayar el path (details.html) b esm el page 3andak
-            // window.location.href=`details.html?id=${encodeURIComponent(id)}`;
-            //esta5dm el satrin dol 3lshan tgib el id mn el url w tsta5dmo f el api f el function 3andak
-            // const urlParam=new URLSearchParams(window.location.search);
-            // const index=urlParam.get("id");
         });
     }
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const username = localStorage.getItem("username");
+    if (username) {
+        const alog = document.getElementById("alog");
+        const areg = document.getElementById("areg");
+        const userr = document.getElementById("user-name");
+        userr.classList.add("md:inline-block","hidden")
+        alog.classList.add("hidden");
+        areg.classList.add("hidden");
+        userr.classList.remove("hidden");
+        userr.innerText = username;
+        const alogg = document.getElementById("alogg");
+        const aregg = document.getElementById("aregg");
+        const userrr = document.getElementById("user-namee");
+        userrr.classList.add("md:hidden","inline-block");
+        
+        alogg.classList.add("hidden");
+        aregg.classList.add("hidden");
+        userrr.classList.remove("hidden");
+        userrr.innerText = username;
+        
+    }
+});

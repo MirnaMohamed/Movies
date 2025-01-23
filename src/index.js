@@ -46,6 +46,9 @@ smCategory.addEventListener('change', function () {
 function display() {
     var cartona = ``;
     for (var i = 0; i < list.length; i++) {
+        if (!list[i].poster_path && !list[i].profile_path) {
+            continue; 
+        }
         cartona += `<div data-index="${list[i].id}" class="text-center">
             <img class="w-full object-cover rounded-lg" src="https://image.tmdb.org/t/p/w500/${list[i].poster_path ? list[i].poster_path : list[i].profile_path}" alt="Card Image">
             <h2 class="mt-4 text-lg font-bold text-white">${list[i].original_title ? list[i].original_title : list[i].original_name}</h2>

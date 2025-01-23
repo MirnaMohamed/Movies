@@ -12,9 +12,11 @@
   </head>
   <body class="bg-[url('../images/theater.jpg')] bg-cover bg-fixed w-full">
     <nav
-      class="flex md:items-center justify-between fixed top-0 bg-slate-900 text-white w-full md:h-20 h-max z-50"
+      class="flex md:items-center justify-between fixed top-0 bg-slate-900 shadow-lg text-white w-full md:h-16 h-max z-50"
     >
-      <div class="ml-4 my-0.5 w-5/12 text-center flex md:items-center md:h-3.5 h-fit">
+      <div
+        class="ml-4 my-0.5 w-5/12 text-center flex md:items-center md:h-3.5 h-fit"
+      >
         <a href="./index.html" class="text-lg md:text-2xl font-bold">
           <i class="fa-solid fa-film"></i> MoviesAPI
         </a>
@@ -30,15 +32,7 @@
           class="hidden md:flex flex-wrap md:flex-row flex-col h-full justify-around items-center w-full pb-2"
         >
           <li>
-            <select
-              id="dropdown"
-              class="bg-slate-900 border-none hover:text-gray-300"
-            >
-              <option value="all">All</option>
-              <option value="movie">Movies</option>
-              <option value="tv">TVshows</option>
-              <option value="person">People</option>
-            </select>
+            <a href="index.html">Home</a>
           </li>
           <li class="hidden md:inline-block">
             <i class="fas fa-search"></i>
@@ -54,18 +48,52 @@
         </ul>
       </div>
     </nav>
-    <main
-      class="h-full flex flex-wrap flex-col justify-center items-center w-full "
+    <div
+      class="w-full h-fit flex justify-center items-center fixed md:top-16 top-8 pt-5  pb-3 bg-slate-900 z-30"
     >
-    <div class="w-full h-fit flex justify-center md:mt-24 mt-[5rem]">
       <input
-        class="text-center text-white w-9/12 h-10 rounded focus:outline-offset-8 border-b-2 border-slate-600 focus:border-sky-600 bg-slate-800"
+        class="text-center text-white w-8/12 h-10 rounded focus:outline-offset-8 border-b-2 border-slate-600 focus:border-sky-600 bg-slate-800"
         id="searchBar"
         type="text"
         placeholder="Search movies and tv shows"
       />
+      <i
+        class="fa-solid fa-sliders text-white pl-3 text-2xl cursor-pointer"
+        id="filter"
+      ></i>
     </div>
-
+    <main
+      class="flex flex-wrap flex-col justify-center items-center w-full md:mt-36 mt-32"
+    >
+      <div
+        class="text-white hidden absolute z-50 w-2/5 h-5/6 top-20 space-x-2 space-y-2 justify-center items-center bg-slate-700 shadow-xl shadow-gray-900 rounded"
+        id="filterWindow"
+      >
+        <div class="w-full flex justify-around">
+          <h5>Type:</h5>
+          <select id="type" class="bg-slate-700 border-none hover:text-white">
+            <option value="multi">All</option>
+            <option value="movie">Movies</option>
+            <option value="tv">TV Shows</option>
+            <option value="person">People</option>
+          </select>
+        </div>
+        <div class="w-full flex justify-evenly">
+          <h5>Include Adult:</h5>
+          <input type="radio" id="true" name="Include" value="true" class="bg-slate-700 border-none hover:text-white">
+          <label for="true">True</label>
+          <input type="radio" id="false" name="Include" value="false" checked class="bg-slate-700 border-none hover:text-white">
+          <label for="false">False</label>
+        </div>
+        <div class="flex w-full justify-around" id="submit">
+          <button value="ok" class="bg-sky-500 text-white rounded p-1">
+            Submit
+          </button>
+          <button value="cancel" class="bg-pink-950 text-white rounded p-1">
+            Cancel
+          </button>
+        </div>
+      </div>
       <div
         id="results"
         class="flex flex-wrap items-center justify-center w-full px-1 m-4"

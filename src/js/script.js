@@ -15,14 +15,12 @@ menu.addEventListener('click', function () {
 });
 
 //updating the search results whenever a character is typed
-var selectorValue = document.getElementById("dropdown");
 var searchResults = document.getElementById("results");
 var pageNo = document.getElementById("pageNumber");
 var search = document.getElementById('searchBar');
 let url = new URL("https://api.themoviedb.org/3/search/multi");
 let xhr = new XMLHttpRequest();
 search.addEventListener('keyup', function () {
-    console.log(selectorValue.value)
     if (search.value !== null) {
         url.searchParams.append("query", search.value);
         xhr.open("GET", url);
@@ -44,10 +42,11 @@ search.addEventListener('keyup', function () {
 function handleResponse(response) {
     var results = [];
     results = response.results;
+    var currentPage = response.page;
     var total_pages = response.total_pages;
-    viewMovies(results, total_pages);
+    viewMovies(results, currentPage, total_pages);
 }
-function viewMovies(movies, total_pages) {
+function viewMovies(movies, currentPage, total_pages, filterOptions = null) {
     searchResults.innerHTML = "";
     for (m of movies) {
         var movieElement = document.createElement("div");
@@ -69,27 +68,37 @@ function viewMovies(movies, total_pages) {
                                 <h3>${title}</h3>`;
         searchResults.appendChild(movieElement);
     }
-    displayPages(movies, total_pages);
+    displayPages(movies, currentPage, total_pages);
 }
-function displayPages(movies, total_pages) {
+//display the page numbers to choose from
+function displayPages(movies, currentPage, total_pages) {
 
     pageNo.classList.remove("hidden", "md:hidden");
     pageNo.innerHTML = "";
     if (total_pages <= 5 && total_pages !== 0) {
         for (var i = 1; i < total_pages + 1; i++) {
             var page = document.createElement("div");
-            page.classList.add("m-2", "p-2.5", "rounded", "bg-slate-600", "text-white", "cursor-pointer");
+            page.classList.add("m-2", "p-2.5", "rounded", "bg-slate-600", "hover:bg-slate-800", "focus:bg-sky-900", "text-white", "cursor-pointer");
             page.innerText = i;
             page.id = i;
+            if (i === currentPage) {
+                page.classList.remove("bg-slate-600");
+                page.classList.add("bg-sky-900");
+            }
             pageNo.appendChild(page);
         }
     }
     else {
-        for (var i = 1; i < 4; i++) {
+        for (var i = 1; i <= 3; i++) {
             var page = document.createElement("div");
-            page.classList.add("m-2", "p-2.5", "rounded", "cursor-pointer", "bg-slate-600", "text-white");
+            page.classList.add("m-2", "p-2.5", "rounded", "cursor-pointer", "bg-slate-600", "text-white", "focus:bg-sky-900");
             page.innerText = i;
             page.id = i;
+
+            if (i === currentPage) {
+                page.classList.remove("bg-slate-600");
+                page.classList.add("bg-sky-900");
+            }
             pageNo.appendChild(page);
         }
         var dots = document.createElement("span");
@@ -97,9 +106,13 @@ function displayPages(movies, total_pages) {
         dots.classList.add("m-2", "p-2.5", "text-white")
         pageNo.appendChild(dots);
         var lastPage = document.createElement("div");
-        lastPage.classList.add("m-2", "p-2.5", "rounded", "cursor-pointer", "bg-slate-600", "text-white");
+        lastPage.classList.add("m-2", "p-2.5", "rounded", "cursor-pointer", "bg-slate-600", "text-white", "focus:bg-sky-900");
         lastPage.innerText = total_pages;
         lastPage.id = total_pages;
+
+        if (currentPage == total_pages) {
+            lastPage.classList.add("bg-sky-900");
+        }
         pageNo.appendChild(lastPage);
     }
     pageNo.addEventListener("click", (e) => {
@@ -110,6 +123,8 @@ function displayPages(movies, total_pages) {
     });
 }
 function changePage(targetPage) {
+    var targetPageDiv = document.getElementById(targetPage);
+    targetPageDiv.classList.add("bg-sky-900")
     url.searchParams.delete("query");
     url.searchParams.delete("page");
     url.searchParams.append("query", search.value);
@@ -127,3 +142,19 @@ function changePage(targetPage) {
     };
 
 }
+
+//add filtering criteria
+var filter = document.getElementById("filter");
+var filterDiv = document.getElementById("filterWindow")
+filter.addEventListener("click", () => {
+    if (filterDiv.classList.contains("hidden")) {
+        filterDiv.classList.remove("hidden");
+        filterDiv.classList.add("flex");
+        filterDiv.classList.add("flex-col");
+    }
+    else {
+        filterDiv.classList.add("hidden");
+        filterDiv.classList.remove("flex");
+    }
+})
+

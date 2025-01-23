@@ -22,6 +22,7 @@ if(myhttp.readyState==4){
     for(let i=0;i<x.length;i++){
         if(x[i].dpassword == password.value && x[i].demail == email.value ){
             flag=1;
+            username=x[i].dusername;
         }
 
     }

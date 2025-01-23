@@ -45,7 +45,11 @@ smCategory.addEventListener('change', function () {
 });
 function display() {
     var cartona = ``;
+    
     for (var i = 0; i < list.length; i++) {
+        if (!list[i].poster_path && !list[i].profile_path) {
+            continue; 
+        }
         cartona += `<div data-index="${list[i].id}" class="text-center">
             <img class="w-full object-cover rounded-lg" src="https://image.tmdb.org/t/p/w500/${list[i].poster_path ? list[i].poster_path : list[i].profile_path}" alt="Card Image">
             <h2 class="mt-4 text-lg font-bold text-white">${list[i].original_title ? list[i].original_title : list[i].original_name}</h2>
@@ -93,12 +97,6 @@ function getCards() {
             console.log(movieId);
             window.location.href = `details.html?id=${movieId}`;
 
-
-            //8ayar el path (details.html) b esm el page 3andak
-            // window.location.href=`details.html?id=${encodeURIComponent(id)}`;
-            //esta5dm el satrin dol 3lshan tgib el id mn el url w tsta5dmo f el api f el function 3andak
-            // const urlParam=new URLSearchParams(window.location.search);
-            // const index=urlParam.get("id");
         });
     }
 }

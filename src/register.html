@@ -6,9 +6,9 @@
     <title>Register</title>
     <link href="./css/output.css" rel="stylesheet">
 </head>
-
+<!--items-center-->
 <body class=" flex  justify-center items-center min-h-screen  ">
-    <div class="bg-[#ddeaf6] max-w-md w-full rounded-lg p-8 " >
+    <div class="bg-[#e5eef7] max-w-md w-full rounded-lg p-8 " >
         <h1 class="text-center text-2xl font-semibold">Create an Account</h1>
         <form id="registrationForm" class="m-4">
             <div class="mb-4">
@@ -33,7 +33,7 @@
 
             <div class="mb-4">
                 <label for="confirm"class="block mb-3">Confirm Password</label>
-                <input type="password" name="" id="confirm" class="border w-full p-2 rounded-lg  focus:outline-none focus:ring-2 focus:ring-blue-700 "placeholder="Confirm your password" >
+                <input type="password" name="" id="confirm" class="border w-full p-2 rounded-lg  focus:outline-none focus:ring-2 focus:ring-blue-700 "placeholder="Confirm your password"required >
                 <p id="pcon" class="text-xs text-gray-500  hidden"></p>
            
             </div>
@@ -41,11 +41,13 @@
             <button id="regButton" type="submit" class="w-full rounded-lg bg-[#8eb4cc] p-2 mt-6 hover:shadow-lg hover:h-12 focus:bg-[#7096ae] ">Create</button>
                                     
         </form>
-        
+        <!--target="_blank"-->
+        <p id="msglogin" class="text-xs text-gray-500  hidden"></p>
+                        
         <p class="text-center">Already have an account?  <a href="login.html" class="font-bold"  >Login</a> </p>
         
 
     </div>
-    <!-- <script src="./js/scripts.js"></script> -->
+    <script src="./js/scripts1.js"></script>
 </body>
 </html>

@@ -185,5 +185,6 @@ btn_reg.addEventListener("click", (event) => {
         }
 
         registerUser();
+        window.location.replace("login.html");
     });
 });

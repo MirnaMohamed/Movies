@@ -22,7 +22,7 @@ function fetchMovies(category, page = 1) {
             currentPage = page;
             console.log(list);
             display();
-            updateButtonState();
+        //updateButtonState();
             renderPageNumbers();
         }
     });
@@ -46,6 +46,7 @@ smCategory.addEventListener('change', function () {
 function display() {
     var cartona = ``;
     for (var i = 0; i < list.length; i++) {
+        if(!list[i].poster_path && !list[i].profile_path) continue;
         cartona += `<div data-index="${list[i].id}" class="text-center">
             <img class="w-full object-cover rounded-lg" src="https://image.tmdb.org/t/p/w500/${list[i].poster_path ? list[i].poster_path : list[i].profile_path}" alt="Card Image">
             <h2 class="mt-4 text-lg font-bold text-white">${list[i].original_title ? list[i].original_title : list[i].original_name}</h2>
@@ -102,3 +103,31 @@ function getCards() {
         });
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const username = localStorage.getItem("username");
+    if (username) {
+
+        const alog = document.getElementById("alog");
+        const areg = document.getElementById("areg");
+
+        const userr = document.getElementById("user-name");
+        userr.classList.add("md:inline-block","hidden")
+        alog.classList.add("hidden");
+        areg.classList.add("hidden");
+        userr.classList.remove("hidden");
+        userr.innerText = username;
+
+
+        const alogg = document.getElementById("alogg");
+        const aregg = document.getElementById("aregg");
+        const userrr = document.getElementById("user-namee");
+        userrr.classList.add("md:hidden","inline-block");
+        
+        alogg.classList.add("hidden");
+        aregg.classList.add("hidden");
+        userrr.classList.remove("hidden");
+        userrr.innerText = username;
+        
+    }
+});

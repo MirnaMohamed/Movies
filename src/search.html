@@ -10,7 +10,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css"
     />
   </head>
-  <body class="bg-[url('../images/theater.jpg')] bg-cover bg-fixed w-full">
+  <body class="bg-[url('../images/theater.jpg')] bg-cover bg-fixed w-full h-full">
     <nav
       class="flex md:items-center justify-between fixed top-0 bg-slate-900 shadow-lg text-white w-full md:h-16 h-max z-50"
     >
@@ -21,6 +21,8 @@
           <i class="fa-solid fa-film"></i> MoviesAPI
         </a>
       </div>
+      <p id="user-name" class="hidden">name</p>
+
       <div class="w-6/12 justify-between">
         <div
           class="flex items-center justify-self-end text-center md:hidden my-1 p-1 mr-3"
@@ -28,8 +30,9 @@
         >
           <i class="text-center size-5 fa-solid fa-bars"></i>
         </div>
+
         <ul
-          class="hidden md:flex flex-wrap md:flex-row flex-col h-full justify-around items-center w-full pb-2"
+        class="hidden md:flex flex-wrap md:flex-row flex-col h-full justify-around items-center w-full pb-2"
         >
           <li>
             <a href="index.html">Home</a>
@@ -38,13 +41,17 @@
             <i class="fas fa-search"></i>
           </li>
           <li>
-            <a class="font-medium" href="./about.html" class="">Contact</a>
+            <a class="font-medium" href="./contactus.html" class="">Contact</a>
           </li>
           <li>
-            <a class="font-medium" href="./about.html" class=""
-              >Login/Register</a
-            >
+            <a id="alog" class="font-medium" href="./login.html" class=""
+              >Login</a>
           </li>
+          <li>
+            <a id="areg" class="font-medium" href="./register.html" class=""
+              >Register</a>
+          </li>
+          <p id="user-namee" class="hidden">name</p>
         </ul>
       </div>
     </nav>
@@ -56,17 +63,21 @@
         id="searchBar"
         type="text"
         placeholder="Search movies and tv shows"
-      />
-      <i
-        class="fa-solid fa-sliders text-white pl-3 text-2xl cursor-pointer"
-        id="filter"
-      ></i>
-    </div>
-    <main
-      class="flex flex-wrap flex-col justify-center items-center w-full md:mt-36 mt-32"
-    >
-      <div
-        class="text-white hidden absolute z-50 w-2/5 h-5/6 top-20 space-x-2 space-y-2 justify-center items-center bg-slate-700 shadow-xl shadow-gray-900 rounded"
+        />
+        <i
+          class="fa-solid fa-sliders text-white pl-3 text-2xl cursor-pointer"
+          id="filter"
+        ></i>
+      </div>
+      <main
+        class="flex flex-wrap flex-col justify-center items-center w-full md:mt-[8.5rem] mt-32 h-full"
+      >
+        <div
+          id="results"
+          class="flex flex-wrap items-center justify-center w-full px-1 m-4 h-full"
+        ></div>
+        <div
+        class="text-white hidden absolute z-50 w-2/6 h-5/6 top-20 space-x-2 space-y-2 justify-center items-center bg-slate-700 shadow-xl shadow-gray-900 rounded"
         id="filterWindow"
       >
         <div class="w-full flex justify-around">
@@ -78,29 +89,11 @@
             <option value="person">People</option>
           </select>
         </div>
-        <div class="w-full flex justify-evenly">
-          <h5>Include Adult:</h5>
-          <input type="radio" id="true" name="Include" value="true" class="bg-slate-700 border-none hover:text-white">
-          <label for="true">True</label>
-          <input type="radio" id="false" name="Include" value="false" checked class="bg-slate-700 border-none hover:text-white">
-          <label for="false">False</label>
-        </div>
-        <div class="flex w-full justify-around" id="submit">
-          <button value="ok" class="bg-sky-500 text-white rounded p-1">
-            Submit
-          </button>
-          <button value="cancel" class="bg-pink-950 text-white rounded p-1">
-            Cancel
-          </button>
-        </div>
-      </div>
-      <div
-        id="results"
-        class="flex flex-wrap items-center justify-center w-full px-1 m-4"
-      ></div>
-      <div id="pageNumber" class="flex flex-wrap hidden md:hidden mb-3"></div>
-    </main>
-    <footer></footer>
-    <script src="js/script.js"></script>
-  </body>
-</html>
+        <div id="pageNumber" class="flex flex-wrap hidden md:hidden mb-3"></div>
+      </main>
+      <footer></footer>
+      <script src="js/search.js"></script>
+    </body>
+  </html>
+
+

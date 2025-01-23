@@ -24,8 +24,8 @@
     <nav class="bg-slate-900 text-white flex items-center justify-between px-6 h-16 w-full md:h20">
         <div class="container flex items-center justify-between space-x-8">
             <a href="#" class="text-lg md:text-2xl font-bold"><i class="fa-solid fa-film"></i> MoviesAPI</a>
-
-
+            <!--   -->
+              <p id="user-namee" class="hidden">name</p>
             <ul id="section" class="hidden md:flex space-x-6 items-end relative right-0 text-xl">
 
                 <li class="relative group">
@@ -36,21 +36,28 @@
                         <option value="person">People</option>
                     </select>
                 </li>
+
+                
+                <a id="areg" href="register.html" class="hover:text-gray-300">Register</a>
+                <a id="alog" href="login.html" class="hover:text-gray-300">Login</a>             
+
                 <li>
-                    <a href="" class="hover:text-gray-300">Login/Register</a>
+                    <a href="contactus.html" class="hover:text-gray-300">Contact</a>
                 </li>
                 <li>
-                    <a href="" class="hover:text-gray-300">Contact</a>
+                    <a href="search.html" class="hover:text-gray-300"><i class="fas fa-search"></i></a>
                 </li>
-                <li>
-                    <a href="" class="hover:text-gray-300"><i class="fas fa-search"></i></a>
-                </li>
+                <!--    -->
+                <p id="user-name" class="hidden">name</p>
+
             </ul>
+           
             <div class="md:hidden">
                 <button id="menu" class="open text-xl font-bold hover:opacity-100 duration-300">
                     <i class="text-white fa-solid fa-bars"></i>
                 </button>
             </div>
+            
 
         </div>
     </nav>
@@ -65,13 +72,17 @@
             </select>
         </li>
         <li>
-            <a href="" class="hover:text-gray-300">Login/Register</a>
+            <a id="aregg" href="register.html" class="hover:text-gray-300">Register</a>
         </li>
         <li>
-            <a href="" class="hover:text-gray-300">Contact</a>
+            <a id="alogg" href="login.html" class="hover:text-gray-300">Login</a>
+        </li>
+       
+        <li>
+            <a href="contactus.html" class="hover:text-gray-300">Contact</a>
         </li>
         <li>
-            <a href="" class="hover:text-gray-300"><i class="fas fa-search"></i> Search</a>
+            <a href="search.html" class="hover:text-gray-300"><i class="fas fa-search"></i> Search</a>
         </li>
     </ul>
 
@@ -93,7 +104,9 @@
     </div>
 
 
-    <script src="index.js"></script>
+    <script src="./js/index.js"></script>
+    
+    
 </body>
 
 </html>

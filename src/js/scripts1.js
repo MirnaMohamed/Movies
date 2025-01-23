@@ -146,13 +146,17 @@ function registerUser() {
     myhttp.addEventListener("readystatechange", () => {
         if (myhttp.readyState === 4) {
             if (myhttp.status === 201) {
+             
                 alert("User registered successfully!");
+
             } else {
+
                 console.error("Error registering user:", myhttp.responseText);
                 alert("Failed to register user.");
             }
         }
     });
+
 }
 
 // Updated btn_reg Click Event
@@ -185,5 +189,7 @@ btn_reg.addEventListener("click", (event) => {
         }
 
         registerUser();
+        window.location.replace("login.html");
+
     });
 });

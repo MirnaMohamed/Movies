@@ -158,3 +158,27 @@ filter.addEventListener("click", () => {
     }
 })
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    const username = localStorage.getItem("username");
+    if (username) {
+
+        const alog = document.getElementById("alog");
+        const areg = document.getElementById("areg");
+        const userr = document.getElementById("user-namee");
+        const userrr = document.getElementById("user-name");
+        userr.innerText = username;
+        userrr.innerText = username;
+        
+        userr.classList.add("md:inline-block","hidden")
+        alog.classList.add("hidden"); 
+        areg.classList.add("hidden");
+        userr.classList.remove("hidden");
+        
+        userrr.classList.add("md:hidden","inline-block");
+        userrr.classList.remove("hidden");
+
+        
+    }
+});
+

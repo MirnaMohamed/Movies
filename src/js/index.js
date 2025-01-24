@@ -49,7 +49,7 @@ function display() {
         if (!list[i].poster_path && !list[i].profile_path) {
             continue; 
         }
-        cartona += `<div data-index="${list[i].id}" class="text-center">
+        cartona += `<div data-index="${list[i].id}" data-category="${list[i].media_type}" class="text-center">
             <img class="w-full object-cover rounded-lg" src="https://image.tmdb.org/t/p/w500/${list[i].poster_path ? list[i].poster_path : list[i].profile_path}" alt="Card Image">
             <h2 class="mt-4 text-lg font-bold text-white">${list[i].original_title ? list[i].original_title : list[i].original_name}</h2>
         </div>`
@@ -93,8 +93,10 @@ function getCards() {
     for (let i = 0; i < cards.length; i++) {
         cards[i].addEventListener('click', (e) => {            
             var movieId = cards[i].getAttribute('data-index');
+            var movieCategory = cards[i].getAttribute('data-category');
             console.log(movieId);
-            window.location.href = `details.html?id=${movieId}`;
+            console.log(movieCategory);
+            window.location.href = `details.html?id=${movieId}&category=${movieCategory}`;
 
         });
     }
